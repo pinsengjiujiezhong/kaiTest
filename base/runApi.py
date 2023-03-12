@@ -8,15 +8,27 @@ import json
 
 
 class runApi:
-    def __init__(self):
-        pass
+    def __init__(self, domain='', headers={}):
+        self.headers = headers
+        self.domain = domain
 
-    def run_api(self, url, method, headers={}, data={}, params={}, proxy={}, files=None):
-        response = requests.request(url, method=method, headers=headers, data=data, params=params, proxy=proxy, files=files)
+    def request(self, method, url, headers, data, params, proxies, files):
+        response = response = requests.request(method, url, data=data, params=params, headers=headers, proxies=proxies, files=files)
+        return response
+
+    def run_api(self, path, method="POST", headers={}, data={}, params={}, proxies=[], files=None, thick=None, error=False):
+        url = self.domain + path
+        data = json.dumps(data)
+        self.headers.update(headers)
+        response = self.request(method, url, headers=self.headers, data=data, params=params, proxies=proxies, files=files)
+        if thick:
+            return response
         try:
-            result = json.loads(response.text)
-            return result
+            return json.loads(response.text)
         except Exception as e:
             print(e)
-            return result
+            return response.text
+
+    def get_cookies(self):
+        pass
 

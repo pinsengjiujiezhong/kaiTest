@@ -2,3 +2,6 @@
 __author__ = 'kai.yang'
 __date__ = '2023/3/8 22:35'
 
+import os
+import sys
+sys.path.append(os.path.dirname(__file__))
