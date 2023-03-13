@@ -1,10 +1,14 @@
 #coding=utf-8
 __author__ = 'kai.yang'
 __date__ = '2023/3/11 16:29'
-
+import platform
 username = '13533630193@163.com'
 password = 'zhang001'
 domain = 'http://127.0.0.1:8000'
+if platform.system().lower() == 'linux':
+    domain = 'http://49.235.95.49:8085'
+if platform.system().lower() == 'windows':
+    domain = 'http://127.0.0.1:8000'
 login_headers = {
     'Accept': 'application/json, text/plain, */*',
     'Accept-Encoding': 'gzip, deflate, br',
