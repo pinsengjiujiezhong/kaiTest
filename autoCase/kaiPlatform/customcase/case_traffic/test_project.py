@@ -10,6 +10,7 @@ import allure
 from customcase.base.apiBase import ApiBase
 from .module_params import *
 import random
+import logging
 
 
 class TestProject:
@@ -43,6 +44,7 @@ class TestProject:
         port = random.randint(1000, 60000)
         title = '这个是主机名称%d'% random.randint(10000, 90000)
         remark = '这个是备注%d'% random.randint(10000, 90000)
+        logging.info('发送添加项目数据请求--这个是日志')
         result = self.projectApi.add_project_api(host=host, port=port, title=title, remark=remark)
         assert result['code'] == 0
         project_list = self.projectApi.get_project_list_api()['data']['projectList']
@@ -81,6 +83,7 @@ class TestProject:
         port = str(random.randint(1000, 60000))
         title = '这个是主机名称%d'% random.randint(10000, 90000)
         remark = '这个是备注%d'% random.randint(10000, 90000)
+        logging.info('this send request')
         result = self.projectApi.update_project_api(id=pid, host=host, port=port, title=title, remark=remark)
         assert result['code'] == 0
         new_project = self.projectApi.get_project_detail_api(pid=pid)['data']
